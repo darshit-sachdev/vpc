@@ -1,5 +1,5 @@
 resource "aws_vpc" "main" {
-  cidr_block           = "10.0.0.0/16"
+  cidr_block           = var.CIDR_BLOCK
   instance_tenancy     = "default"
   enable_dns_support   = "true"
   enable_dns_hostnames = "true"
@@ -12,9 +12,9 @@ resource "aws_vpc" "main" {
 # Subnets
 resource "aws_subnet" "main-public-1" {
   vpc_id                  = aws_vpc.main.id
-  cidr_block              = "10.0.1.0/24"
+  cidr_block              = var.CIDR_BLOCK_SUBNET
   map_public_ip_on_launch = "true"
-  availability_zone       = "us-east-2a"
+  availability_zone       = var.AZ
 
   tags = {
     Name = "demo-subnet-1"
